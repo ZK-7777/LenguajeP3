@@ -10,4 +10,4 @@ const SobreMi = () => {
 };
 
 export default SobreMi;
-//Hola
+//Hola, les voy a enseñar qué tienen que hacer
