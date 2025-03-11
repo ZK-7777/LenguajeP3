@@ -1,228 +1,274 @@
 :root {
-    --color-bg: #0a192f;    /* Azul oscuro profesional */
-    --color-text: #e6f1ff;  /* Blanco azulado */
-    --color-accent: #64ffda; /* Verde-azul neón */
-    --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
-  
-  /* Estilos generales de la navbar */
-  .navbar {
-    background: var(--color-bg);
-    padding: 1.5rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
-  }
-  
-  /* Logo */
-  .logo {
-    text-decoration: none;
-  }
-  
-  .logo-text {
-    color: var(--color-accent);
-    font-size: 1.8rem;
-    font-family: 'SF Mono', monospace;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-  
-  /* Contenedor de enlaces y acciones */
+  /* Variables para modo oscuro (default) */
+  --color-bg: #0a192f;
+  --color-text: #e6f1ff;
+  --color-accent: #64ffda;
+  --nav-bg: #1a1a1a;
+  --button-hover: rgba(100, 255, 218, 0.1);
+  --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.light-theme {
+  /* Sobreescritura para modo claro */
+  --color-bg: #f8f9fa;
+  --color-text: #333333;
+  --color-accent: #007bff;
+  --nav-bg: #ffffff;
+  --button-hover: rgba(0, 123, 255, 0.1);
+}
+
+.navbar {
+  background: var(--nav-bg);
+  padding: 1.5rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+  height: 70px;
+  transition: var(--transition);
+}
+
+.logo-text {
+  color: var(--color-accent);
+  font-size: 1.8rem;
+  font-family: 'SF Mono', monospace;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.nav-link {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-family: 'SF Mono', monospace;
+  position: relative;
+  transition: var(--transition);
+}
+
+.nav-link::after {
+  background: var(--color-accent);
+}
+
+.login-button {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.login-button:hover {
+  border-color: var(--color-accent);
+  background: var(--button-hover);
+}
+
+.cv-button {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.cv-button:hover {
+  background: var(--button-hover);
+}
+
+.icon {
+  color: var(--color-text);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
   .nav-items {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
+    background: var(--nav-bg);
   }
-  
-  /* Enlaces de navegación */
+}
+
+/* Mantenemos todo el CSS original con pequeñas adaptaciones */
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  transition: var(--transition);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link--active::after {
+  width: 100% !important;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.icon {
+  font-size: 1.3rem;
+  transition: var(--transition);
+}
+
+.icon:hover {
+  transform: translateY(-3px);
+}
+
+.social-icons a:nth-child(1):hover .icon {
+  color: #1877f2;
+}
+
+.social-icons a:nth-child(2):hover .icon {
+  color: #e4405f;
+}
+
+.social-icons a:nth-child(3):hover .icon {
+  color: #0a66c2;
+}
+
+.social-icons a:nth-child(4):hover .icon {
+  color: #6e5494;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.login-button, .cv-button {
+  background: transparent;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-family: 'SF Mono', monospace;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: var(--transition);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  z-index: 1001;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 60px;
+    padding: 1rem 5%;
+  }
+
+  .nav-items {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 70%;
+    flex-direction: column;
+    padding: 7rem 2rem;
+    transition: 0.4s;
+  }
+
+  .nav-items.active {
+    right: 0;
+  }
+
   .nav-links {
-    display: flex;
-    gap: 2.5rem;
-  }
-  
-  .nav-link {
-    color: var(--color-text);
-    font-size: 0.9rem;
-    font-family: 'SF Mono', monospace;
-    text-decoration: none;
-    position: relative;
-    padding: 5px 0;
-    transition: var(--transition);
-  }
-  
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background: var(--color-accent);
-    transition: var(--transition);
-  }
-  
-  .nav-link:hover::after {
-    width: 100%;
-  }
-  
-  /* Contenedor de redes sociales y botones */
-  .nav-actions {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 2rem;
   }
-  
-  /* Íconos de redes sociales */
+
+  .nav-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
   .social-icons {
-    display: flex;
-    gap: 1.5rem;
+    order: -1;
+    margin-bottom: 2rem;
   }
-  
-  .icon {
-    color: var(--color-text);
-    font-size: 1.3rem;
-    transition: var(--transition);
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
   }
-  
-  /* Colores personalizados al hacer hover */
-  .icon:hover {
-    transform: translateY(-3px);
+
+  .login-button, .cv-button {
+    width: 100%;
+    justify-content: center;
   }
-  
-  .social-icons a:nth-child(1):hover .icon { /* Facebook */
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@keyframes navEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: navEntrance 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Ajustes específicos para modo claro */
+.light-theme {
+  .social-icons a:nth-child(1):hover .icon {
     color: #1877f2;
   }
-  
-  .social-icons a:nth-child(2):hover .icon { /* Instagram */
+
+  .social-icons a:nth-child(2):hover .icon {
     color: #e4405f;
   }
-  
-  .social-icons a:nth-child(3):hover .icon { /* LinkedIn */
+
+  .social-icons a:nth-child(3):hover .icon {
     color: #0a66c2;
   }
-  
-  .social-icons a:nth-child(4):hover .icon { /* GitHub */
+
+  .social-icons a:nth-child(4):hover .icon {
     color: #6e5494;
   }
-  
-  /* Contenedor de botones (Login + CV) */
-  .action-buttons {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  /* Botón de Login */
-  .login-button {
-    background: transparent;
-    color: var(--color-text);
-    border: 2px solid var(--color-text);
-    border-radius: 4px;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-    font-family: 'SF Mono', monospace;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: var(--transition);
-  }
-  
-  .login-button:hover {
-    background: rgba(230, 241, 255, 0.1);
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-  
-  .login-icon {
-    font-size: 1.1rem;
-  }
-  
-  /* Botón de CV */
-  .cv-button {
-    background: transparent;
-    color: var(--color-accent);
-    border: 2px solid var(--color-accent);
-    border-radius: 4px;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-    font-family: 'SF Mono', monospace;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: var(--transition);
-  }
-  
-  .cv-button:hover {
-    background: rgba(100, 255, 218, 0.1);
-  }
-  
-  .cv-icon {
-    font-size: 1.1rem;
-  }
-  
-  /* Menú hamburguesa (mobile) */
+
   .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
     color: var(--color-text);
-    font-size: 1.8rem;
-    z-index: 1001;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .nav-items {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      height: 100vh;
-      width: 70%;
-      background: var(--color-bg);
-      flex-direction: column;
-      padding: 7rem 2rem;
-      transition: 0.4s;
-    }
-  
-    .nav-items.active {
-      right: 0;
-    }
-  
-    .nav-links {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2rem;
-    }
-  
-    .nav-actions {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2rem;
-    }
-  
-    .social-icons {
-      order: -1;
-      margin-bottom: 2rem;
-    }
-  
-    .action-buttons {
-      flex-direction: column;
-      width: 100%;
-    }
-  
-    .login-button,
-    .cv-button {
-      width: 100%;
-      justify-content: center;
-    }
-  
-    .menu-toggle {
-      display: block;
-    }
-  }
+}
+.theme-toggle {
+  margin-top: 10px; /* Ajusta el valor hasta lograr la posición deseada */
+}
