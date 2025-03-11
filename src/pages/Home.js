@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import videoBg from '../assets/video1.mp4';
 
 const Home = () => {
   return (
     <section className="page home-page">
-      {/* Contenedor del video con transparencia */}
       <div className="video-overlay">
         <video 
           className="background-video"
@@ -12,17 +12,24 @@ const Home = () => {
           loop 
           muted 
           playsInline
-          style={{ opacity: 0.80 }} // Ajusta este valor para más/menos transparencia
+          style={{ opacity: 0.80 }}
         >
           <source src={videoBg} type="video/mp4" />
         </video>
       </div>
 
-      {/* Contenido con fondo semitransparente */}
       <div className="hero-content">
         <div className="content-box">
-          <h1>Bienvenidos</h1>
-          <p className="highlight-text">Diseñador y desarrollador frontend</p>
+          <h1>Simulador de Portafolio Profesional</h1>
+          <p className="highlight-text">
+            Crea, personaliza y visualiza tu portafolio de proyectos de manera interactiva. 
+            Ideal para desarrolladores, diseñadores y creativos.
+          </p>
+          
+          {/* Redirige a /perfil */}
+          <Link to="/perfil" className="start-button">
+            Comenzar Ahora
+          </Link>
         </div>
       </div>
     </section>
